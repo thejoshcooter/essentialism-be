@@ -8,7 +8,8 @@ module.exports = {
     add,
     update,
     remove,
-    findValues
+    findValues,
+    removeValues
 };
 
 // helper functions
@@ -49,4 +50,10 @@ function findValues(id) {
         .join('values as v', 'v.id', '=', 'j.value_id')
         .where('userId', id)
         
+}
+
+function removeValues(id, valueId) {
+    return db('users_values')
+        .where({ user_id: id, value_id: valueId })
+        .del()
 }

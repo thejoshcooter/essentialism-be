@@ -65,6 +65,21 @@ router.get('/:id/values', (req, res) => {
     
 });
 
+// remove value from user
+// need to clean up endpoint after mvp
+router.delete('/:id/values/:valueId', (req, res) => {
+    const { id, valueId } = req.params;
+    console.log(id, valueId)
+
+    Users.removeValues(id, valueId)
+    .then(removedValue => {
+        res.status(200).json(removedValue);
+    })
+    .catch(err => {
+        responseHandler(res, 500, "error removing value from user");
+    });
+});
+
 // delete a user
 // need to clean up this endpoint after mvp
 router.delete('/:id', (req, res) => {
