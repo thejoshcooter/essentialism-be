@@ -22,7 +22,7 @@ module.exports = {
   },
 
   staging: {
-    client: 'postgresql',
+    client: 'pg',
     connection: {
       database: 'my_db',
       user:     'username',
@@ -39,13 +39,18 @@ module.exports = {
 
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL || {
+      database: "essentialism",
+      user: "user",
+      password: "pass"
+    },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      directory: './data/migrations'
+      directory: './data/migrations',
+      tableName: "essentialism"
     },
     seeds: {
       directory: './data/seeds'
