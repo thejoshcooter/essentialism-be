@@ -38,11 +38,8 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
-    connection: process.env.DATABASE_URL || {
-      database: "essentialism",
-      user: "user",
-      password: "pass"
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     },
     pool: {
       min: 2,
@@ -56,5 +53,3 @@ module.exports = {
       directory: './data/seeds'
     }
   }
-
-};

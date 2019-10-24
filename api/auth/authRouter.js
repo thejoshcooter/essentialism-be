@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
     .then(user => {
         if (user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user);
-            res.status(200).json({ message: `Welcome ${user.first_name}`, token });
+            res.status(200).json({ message: `Welcome ${user.first_name}`, user_id: user.id, token });
         } else {
             responseHandler(res, 404, "user does not exist");
         }

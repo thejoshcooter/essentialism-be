@@ -16,11 +16,13 @@ const restricted = require('../middleware/restricted');
 const authRouter = require('../api/auth/authRouter');
 const usersRouter = require('../api/users/usersRouter');
 const valuesRouter = require('../api/values/valuesRouter');
+const projectsRouter = require('../api/projects/projectsRouter');
 
 // routers
 server.use('/api/auth', authRouter);
 server.use('/api/users', restricted, usersRouter);
 server.use('/api/values', restricted, valuesRouter);
+server.use('/api/projects', restricted, projectsRouter);
 
 // fallback
 server.use('/', (req, res) => {
