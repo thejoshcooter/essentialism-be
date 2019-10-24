@@ -6,7 +6,7 @@ const router = express.Router();
 const Values = require('./valuesModel');
 
 // middleware 
-// todo
+const valueValidator = require('../../middleware/valueValidator');
 
 // helpers
 const responseHandler = require('../../helpers/responseHandler');
@@ -27,12 +27,8 @@ router.get('/', (req, res) => {
 
 // add a value
 // need to clean up this endpoint after mvp
-router.post('/', (req, res) => {
+router.post('/', valueValidator, (req, res) => {
     const payload = req.body;
-
-    !payload.name ?
-    res.status(401).json({ message: "missing name" }) :
-    console.log("verified name");
     
     Values.add(payload)
     .then(value => {
@@ -45,13 +41,9 @@ router.post('/', (req, res) => {
 
 // update a value
 // need to clean up this endpoint after mvp and add middleware
-router.put('/:id', (req, res) => {
+router.put('/:id', valueValidator, (req, res) => {
     const id = req.params.id;
     const payload = req.body;
-
-    !payload.name ?
-    res.status(401).json({ message: "missing name" }) :
-    console.log("verified name");
 
     Values.update(id, payload)
     .then(updatedValue => {
